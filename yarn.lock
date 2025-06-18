@@ -1588,6 +1588,54 @@
   resolved "https://registry.yarnpkg.com/@poppinss/exception/-/exception-1.2.1.tgz#8a5f2120fabb64a99772166d537d8a97490209ff"
   integrity sha512-aQypoot0HPSJa6gDPEPTntc1GT6QINrSbgRlRhadGW2WaYqUK3tK4Bw9SBMZXhmxd3GeAlZjVcODHgiu+THY7A==
 
+"@prisma/client@^6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-6.10.0.tgz#f4ac34a6462ec236285c22117d07874c59c40282"
+  integrity sha512-C+3A6sPt8EwUlNwsbT22IoUq0O+wXXA4Sw39UmCATlfa8HVP5r0X/l9xGyELhfSmmO0sjgSAl7qmlCHS6Dkekw==
+
+"@prisma/config@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/config/-/config-6.10.0.tgz#0bcf73eb533b8bdf007386f17d412ae096224a6e"
+  integrity sha512-9aA88Vub9O7zdb52PuJg88cN2GCjfY2I45CIttJe7fS5EyvTRRGE/PDQlbjTG9ij9+leD47fGLQCqYDpyCE5Iw==
+  dependencies:
+    jiti "2.4.2"
+
+"@prisma/debug@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/debug/-/debug-6.10.0.tgz#622eeea84ea592f75c6ace33c06bc95d92ae6d3d"
+  integrity sha512-vzVu0Z3DfCzyx0m7LPZgdA/M7opv7B2R7agNLjh1PpIapCqHo/dwoXoj3Kl25A6TkmhexJzOZKedmhpXsMBwGA==
+
+"@prisma/engines-version@6.10.0-43.aee10d5a411e4360c6d3445ce4810ca65adbf3e8":
+  version "6.10.0-43.aee10d5a411e4360c6d3445ce4810ca65adbf3e8"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-6.10.0-43.aee10d5a411e4360c6d3445ce4810ca65adbf3e8.tgz#9f2c17ac1a363d2fd1a1c41495bb6ec46233a521"
+  integrity sha512-Dy7cS5Sz/kzdj2nrYTiPfycf/ZeQXFoIcXgTLmYHpuDX0rGITEGe7JSTSNnLYRUnjTHerDTPGPJCiDeyb6lPBg==
+
+"@prisma/engines@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-6.10.0.tgz#237d8391d8572835dffb38414c4a618cf7757135"
+  integrity sha512-g/VL/J+b1rjzvPLZWSjOt/iWX/As44IF65x0XrsvwjD1UI0hLHzDAVx3AJz4k4cNsFzEQqVl/rLa6ICsLy8v5w==
+  dependencies:
+    "@prisma/debug" "6.10.0"
+    "@prisma/engines-version" "6.10.0-43.aee10d5a411e4360c6d3445ce4810ca65adbf3e8"
+    "@prisma/fetch-engine" "6.10.0"
+    "@prisma/get-platform" "6.10.0"
+
+"@prisma/fetch-engine@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/fetch-engine/-/fetch-engine-6.10.0.tgz#a017b5e86800c8a00124d81236000753566b8bbd"
+  integrity sha512-7An09F6Xe886gSwcj1HEY/0LBuD4IR0ZnKbNv4d0kMnmNzGCz+IK4XRnd/yOkiptIks0nF+igLEin5MEoBejfA==
+  dependencies:
+    "@prisma/debug" "6.10.0"
+    "@prisma/engines-version" "6.10.0-43.aee10d5a411e4360c6d3445ce4810ca65adbf3e8"
+    "@prisma/get-platform" "6.10.0"
+
+"@prisma/get-platform@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/get-platform/-/get-platform-6.10.0.tgz#da63b562302712df3f2177a1439f2e13462ba648"
+  integrity sha512-6xqX2cxC2l0JHySyyFlXZ4QIESeEmkvSJfGy2r/NsQG+vjxBNDrlwDOgh+aQI1ivbgqwFRjSXuUjl/yd2Za2HQ==
+  dependencies:
+    "@prisma/debug" "6.10.0"
+
 "@rolldown/pluginutils@^1.0.0-beta.9":
   version "1.0.0-beta.17"
   resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.17.tgz#397007156d178fa26ea7e09f1cd8b1db42df1c8b"
@@ -4526,7 +4574,7 @@ jackspeak@^3.1.2:
   optionalDependencies:
     "@pkgjs/parseargs" "^0.11.0"
 
-jiti@^2.1.2, jiti@^2.4.2:
+jiti@2.4.2, jiti@^2.1.2, jiti@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.4.2.tgz#d19b7732ebb6116b06e2038da74a55366faef560"
   integrity sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==
@@ -5957,6 +6005,14 @@ pretty-bytes@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-6.1.1.tgz#38cd6bb46f47afbf667c202cfc754bffd2016a3b"
   integrity sha512-mQUvGU6aUFQ+rNvTIAcZuWGRT9a6f6Yrg9bHs4ImKF+HZCEK+plBvnAZYSIQztknZF2qnzNtr6F8s0+IuptdlQ==
+
+prisma@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-6.10.0.tgz#1f1acf230251f0f9643b526099009f50b81b18e4"
+  integrity sha512-hyfwi+HpH2lHlRUj3O6CtWg44D7iuxi/O+xoLIsDjUNvriyFIVlw4a+8facnByZnm4Lt54+ZzJkFvkKBm7bIug==
+  dependencies:
+    "@prisma/config" "6.10.0"
+    "@prisma/engines" "6.10.0"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
