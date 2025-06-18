@@ -1,7 +1,18 @@
 import argon2 from "argon2";
 import prisma from "~/prisma";
-import type { IBackUser, IUserCreate, IUserUpdate } from "~/types/user";
+import type { IBackUser, IUser, IUserCreate, IUserUpdate } from "~/types/user";
 import { EntityNotFoundException } from "~/types/utils/exceptions";
+
+/**
+ * Remove password from json data
+ * @param {IBackUser} user - Full user data
+ * @returns {IUser} Reduced user data
+ */
+export function reduceUser(user: IBackUser): IUser {
+  const _user = { ...user } as Partial<IBackUser>;
+  delete _user.password;
+  return _user as IUser;
+}
 
 /**
  * Create a user
@@ -50,6 +61,22 @@ export async function get(id: string): Promise<IBackUser> {
     },
   });
   if (!user) throw new EntityNotFoundException(`User (${id}) was not found!`);
+  return user;
+}
+
+/**
+ * Get the email targeted user
+ * @param {string} email - Target user email
+ * @returns {IBackUser} Retrieved user
+ * @throws {EntityNotFoundException} Throws when the given id doesn't belong to any user
+ */
+export async function getByEmail(email: string): Promise<IBackUser> {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  if (!user) throw new EntityNotFoundException(`User (${email}) was not found!`);
   return user;
 }
 
