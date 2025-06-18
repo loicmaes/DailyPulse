@@ -1,7 +1,7 @@
 import type { DailyException } from "~/types/utils/exceptions";
 import type { HttpEvent, StatusCode } from "~/types/utils/http";
 
-export function hanleException(event: HttpEvent, exception: DailyException) {
+export function handleException(event: HttpEvent, exception: DailyException) {
   setOutput(event, exception.code, exception.message);
 
   return {
