@@ -1,4 +1,4 @@
-import type { TNull } from "~/types/globals";
+import type { TNull } from "~/types/utils/globals";
 
 export interface IAuthSession {
   token: string;

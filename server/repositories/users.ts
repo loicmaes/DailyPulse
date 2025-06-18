@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import prisma from "~/prisma";
 import type { IBackUser, IUserCreate, IUserUpdate } from "~/types/user";
-import { EntityNotFoundException } from "~/types/exceptions";
+import { EntityNotFoundException } from "~/types/utils/exceptions";
 
 /**
  * Create a user
