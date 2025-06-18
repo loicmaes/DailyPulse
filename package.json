@@ -1,0 +1,41 @@
+{
+  "name": "daily-pulse",
+  "description": "Daily Pulse",
+  "version": "0.1.0",
+  "author": "Loïc MAES",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "yarn@1.22.22",
+  "repository": {
+    "url": "https://github.com/loicmaes/DailyPulse"
+  },
+  "bugs": {
+    "email": "contact@studio-klypi.com",
+    "url": "https://github.com/loicmaes/DailyPulse/issues"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@nuxt/eslint": "1.4.1",
+    "@nuxt/image": "1.10.0",
+    "@nuxtjs/color-mode": "3.5.2",
+    "@nuxtjs/google-fonts": "3.2.0",
+    "@nuxtjs/i18n": "9.5.5",
+    "@pinia/nuxt": "0.11.1",
+    "eslint": "^9.0.0",
+    "nuxt": "^3.17.5",
+    "pinia": "^3.0.3",
+    "shadcn-nuxt": "2.2.0",
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1"
+  }
+}
