@@ -36,11 +36,9 @@ export async function revoke(token: string, userId: string): Promise<IAuthSessio
         token,
         userId,
       },
-      NOT: {
-        revokedAt: null,
-      },
+      revokedAt: null,
       expiresAt: {
-        lt: now,
+        gt: now,
       },
     },
     data: {
@@ -63,7 +61,7 @@ export async function prune(): Promise<number> {
         },
         {
           expiresAt: {
-            gte: new Date(),
+            lte: new Date(),
           },
         },
       ],
@@ -85,11 +83,9 @@ export async function find(token: string, userId: string): Promise<IAuthSession>
         token,
         userId,
       },
-      NOT: {
-        revokedAt: null,
-      },
+      revokedAt: null,
       expiresAt: {
-        lt: new Date(),
+        gt: new Date(),
       },
     },
   });
@@ -111,11 +107,9 @@ export async function validate(token: string, userId: string): Promise<IBackUser
         token,
         userId,
       },
-      NOT: {
-        revokedAt: null,
-      },
+      revokedAt: null,
       expiresAt: {
-        lt: new Date(),
+        gt: new Date(),
       },
     },
   }).user();
