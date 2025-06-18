@@ -10,3 +10,5 @@ export type IUser = Omit<IBackUser, "password">;
 
 export type IUserCreate = Omit<IBackUser, "id" | "createdAt" | "updatedAt">;
 export type IUserUpdate = Partial<IUserCreate>;
+
+export type IUserLogging = Pick<IBackUser, "email" | "password">;
