@@ -1,3 +1,5 @@
+import { StatusCode } from "~/types/utils/http";
+
 export class DailyException extends Error {
   code: number;
 
@@ -7,8 +9,14 @@ export class DailyException extends Error {
   }
 }
 
+export class BadRequestException extends DailyException {
+  constructor(message?: string) {
+    super(StatusCode.BAD_REQUEST, message);
+  }
+}
+
 export class EntityNotFoundException extends DailyException {
   constructor(message?: string) {
-    super(404, message ?? "Entity not found!");
+    super(StatusCode.NOT_FOUND, message ?? "Entity not found!");
   }
 }
