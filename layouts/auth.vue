@@ -17,7 +17,7 @@ import BrandIcon from "~/components/shared/branding/BrandIcon.vue";
     <section class="grid place-items-center">
       <NuxtPage />
     </section>
-    <section class="bg-accent relative">
+    <section class="hidden md:block bg-accent relative">
       <img
         src="~/assets/images/auth-placeholder.webp"
         class="absolute h-full w-full inset-0 object-cover"
