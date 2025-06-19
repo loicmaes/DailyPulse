@@ -46,7 +46,9 @@ export async function recoverMoodBoard(event: HttpEvent) {
   try {
     const moodBoard = await moodEntries.getUserEntries(user.id, query);
 
-    setOutput(event, moodBoard.meta.total > moodBoard.meta.count ? StatusCode.PARTIAL_CONTENT : StatusCode.OK, `There is you mood board (${user.id}).`);
+    if (moodBoard.meta.count === 0) setOutput(event, StatusCode.NO_CONTENT, "Your mood board is actually empty!");
+    else setOutput(event, moodBoard.meta.total > moodBoard.meta.count ? StatusCode.PARTIAL_CONTENT : StatusCode.OK, `There is you mood board (${user.id}).`);
+
     return moodBoard;
   }
   catch (e) {
