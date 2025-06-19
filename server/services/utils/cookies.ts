@@ -7,7 +7,7 @@ export const COOKIES_OPTIONS = (): CookieSerializeOptions => ({
   path: "/",
   httpOnly: true,
   sameSite: "strict",
-  secure: process.env.NODE_ENV === "production",
+  secure: process.env.NODE_ENV !== "development",
 });
 
 export function getAuthCookies(event: HttpEvent): {
