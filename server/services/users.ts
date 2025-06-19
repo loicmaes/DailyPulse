@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import type { HttpEvent } from "~/types/utils/http";
 import { StatusCode } from "~/types/utils/http";
-import type { IUserCreate, IUserLogging } from "~/types/user";
+import type { IUserCreate, IUserLogin } from "~/types/user";
 import * as userRepo from "~/server/repositories/users";
 import * as authRepo from "~/server/repositories/auth-sessions";
 import { handleException, setOutput } from "~/server/services/utils/errors";
@@ -30,7 +30,7 @@ export async function registerUser(event: HttpEvent) {
 }
 
 export async function loginUser(event: HttpEvent) {
-  const body = await readBody<IUserLogging>(event);
+  const body = await readBody<IUserLogin>(event);
   const agent = getHeader(event, "User-Agent");
 
   try {
