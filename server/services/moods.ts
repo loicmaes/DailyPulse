@@ -39,7 +39,34 @@ export async function removeEntry(event: HttpEvent) {
   }
 }
 
-export async function recoverMoodBoard(event: HttpEvent) {
+export async function recoverTodayMoodBoard(event: HttpEvent) {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+
+  const user = event.context.user;
+  const query = getQuery<Omit<ListQuery, "period">>(event);
+
+  try {
+    const moodBoard = await moodEntries.getUserEntries(user.id, {
+      ...query,
+      period: {
+        start,
+        end,
+      },
+    });
+
+    if (moodBoard.meta.count === 0) setOutput(event, StatusCode.NO_CONTENT, "Your mood board is actually empty!");
+    else setOutput(event, moodBoard.meta.total > moodBoard.meta.count ? StatusCode.PARTIAL_CONTENT : StatusCode.OK, `There is you mood board (${user.id}).`);
+
+    return moodBoard;
+  }
+  catch (e) {
+    return handleException(event, e as DailyException);
+  }
+}
+
+export async function recoverHistoryMoodBoard(event: HttpEvent) {
   const user = event.context.user;
   const query = getQuery<ListQuery>(event);
 

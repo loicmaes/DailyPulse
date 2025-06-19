@@ -54,10 +54,14 @@ export async function find(id: string, userId: string): Promise<IMoodEntry> {
  * @param {string} userId - User unique id
  * @returns {number} the total number of registered entries
  */
-export async function getTotalUserEntries(userId: string): Promise<number> {
+export async function getTotalUserEntries(userId: string, period?: ListQuery["period"]): Promise<number> {
   return prisma.moodEntry.count({
     where: {
       userId,
+      createdAt: {
+        gte: period?.start ?? new Date(1970, 0, 1, 0, 0, 0),
+        lt: period?.end ?? new Date(),
+      },
     },
   });
 }
@@ -69,10 +73,14 @@ export async function getTotalUserEntries(userId: string): Promise<number> {
  * @returns {ListResult<IMoodEntry>} data and meta info about the current query
  */
 export async function getUserEntries(userId: string, query?: ListQuery): Promise<ListResult<IMoodEntry>> {
-  const totalCount = await getTotalUserEntries(userId);
+  const totalCount = await getTotalUserEntries(userId, query?.period);
   const list = await prisma.moodEntry.findMany({
     where: {
       userId,
+      createdAt: {
+        gte: query?.period?.start ?? new Date(1970, 0, 1, 0, 0, 0),
+        lt: query?.period?.end ?? new Date(),
+      },
     },
     orderBy: {
       createdAt: "desc",

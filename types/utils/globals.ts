@@ -13,4 +13,8 @@ export interface ListQuery {
   page?: number;
   perPage?: number;
   search?: string;
+  period?: {
+    start: Date;
+    end: Date;
+  };
 }
