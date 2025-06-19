@@ -6,3 +6,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// Authentication
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authSessions AuthSession[]
+
+  @@map("users")
+}
+
+model AuthSession {
+  token     String    @default(uuid())
+  userId    String
+  agent     String
+  createdAt DateTime  @default(now())
+  expiresAt DateTime
+  revokedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id(name: "key", fields: [token, userId])
+  @@map("auth_sessions")
+}

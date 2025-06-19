@@ -1,3 +1,68 @@
 {
-  "hello-world": "Bonjour monde"
+  "toasts": {
+    "errors": {
+      "internal-server-error": "Oups, une erreur interne est survenue..."
+    },
+    "auth": {
+      "login": {
+        "success": "Hey {username}, ravi de te revoir !",
+        "error": "Oups... Vérifie tes identifiants."
+      },
+      "register": {
+        "success": "Hey {username}, bienvenue sur DailyPulse !",
+        "error": "Oups... Impossible de créer ton compte."
+      },
+      "logout": {
+        "loading": "Déconnexion...",
+        "success": "Tu as bien été déconnecté !",
+        "error": "Oups... Je n'ai pas réussi à te déconnecter"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "caption": "Les petits pas font les plus grandes réussites.",
+      "btn": {
+        "login": "Me connecter",
+        "not-registered": "Je n'ai pas de compte"
+      },
+      "fields": {
+        "email": "Adresse e-mail",
+        "password": "Mot de passe"
+      }
+    },
+    "register": {
+      "title": "Inscription",
+      "caption": "Prends ta vie en main dès maintenant !",
+      "btn": {
+        "create-account": "Créer mon compte",
+        "already-registered": "J'ai déjà un compte"
+      },
+      "fields": {
+        "email": {
+          "label": "Adresse e-mail",
+          "rule": "Entre une adresse e-mail valide"
+        },
+        "username": {
+          "label": "Nom d'utilisateur",
+          "rules": {
+            "length": "Doit faire entre 4 et 16 caractères",
+            "format": "Ne peux que contenir a-z, 0-9 et _.-"
+          }
+        },
+        "password": {
+          "label": "Mot de passe",
+          "rules": {
+            "lower": "Doit contenir au moins une minuscule",
+            "upper": "Doit contenir au moins une majuscule",
+            "digit": "Doit contenir au moins un chiffre",
+            "special": "Doit contenit au moins un caractère spécial",
+            "length": "Doit faire entre 8 et 32 caractères"
+          }
+        }
+      },
+      "terms": "En cliquant sur \"Créer mon compte\", tu acceptes nos conditions d'utilisation"
+    }
+  }
 }

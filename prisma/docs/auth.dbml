@@ -1,0 +1,20 @@
+Table User {
+  id uuid pk
+  email string unique
+  username string
+  password string
+
+  createdAt datetime
+  updatedAt datetime
+}
+
+Table AuthSession {
+  userId uuid pk [ref: > User.id]
+  token uuid pk
+
+  agent string [null]
+
+  createdAt datetime
+  expiresAt datetime // Expires after 30j
+  revokedAt datetime [null]
+}
