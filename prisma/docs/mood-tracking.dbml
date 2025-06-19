@@ -1,0 +1,7 @@
+Table MoodEntry {
+  id uuid pk
+  userId uuid [ref: > User.id]
+  mood int // from 1 to 5
+  note string
+  createdAt datetime
+}
