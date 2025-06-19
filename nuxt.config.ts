@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+import tailwindcss from "@tailwindcss/vite";
 
+export default defineNuxtConfig({
   modules: [
     "shadcn-nuxt",
     "@nuxt/eslint",
@@ -11,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
   devtools: { enabled: true },
+  css: ["./tailwind.config.css"],
   colorMode: {
     preference: "system",
     fallback: "dark",
@@ -18,6 +20,11 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
   compatibilityDate: "2025-05-15",
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   eslint: {
     checker: true,
     config: {
