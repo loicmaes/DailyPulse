@@ -45,6 +45,7 @@ const submit = handleSubmit(async (values) => {
     resetField("password");
     return;
   }
+  navigateTo(useLocalePath()("/app"));
 });
 </script>
 
