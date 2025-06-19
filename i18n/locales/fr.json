@@ -26,6 +26,16 @@
       }
     }
   },
+  "labels": {
+    "optional": "(facultatif)",
+    "no-data": "Aucune données...",
+    "loading-data": "Chargement des données..."
+  },
+  "btn": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "history": "Historique"
+  },
   "auth": {
     "login": {
       "title": "Connexion",
@@ -103,6 +113,26 @@
         "caption": "Un mot, une note, un emoji — dis-moi tout ! Je te résumerai ta journée ce soir \uD83C\uDF1C",
         "action": "Exprimer mon mood"
       }
-    ]
+    ],
+    "add-entry-dialog": {
+      "title": "Nouvelle entrée",
+      "caption": "En 10 secondes, tu peux dire comment tu te sens. Le toi de ce soir te dira merci.",
+      "fields": {
+        "mood": "Humeur",
+        "note": {
+          "label": "Commentaire",
+          "caption": "Décris ton humeur en quelques mots"
+        }
+      },
+      "toasts": {
+        "success": "Done ! J'ai ajouté l'action à ton Mood Board."
+      },
+      "btn": {
+        "add": "Ajouter au mood board"
+      }
+    },
+    "history": {
+      "title": "Historique"
+    }
   }
 }

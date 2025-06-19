@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
-import { Rocket } from "lucide-vue-next";
+import { Rocket, History } from "lucide-vue-next";
 import MoodBoardEntriesTable from "~/components/shared/mood-board/MoodBoardEntriesTable.vue";
+import AddMoodBoardEntryDialog from "~/components/shared/mood-board/AddMoodBoardEntryDialog.vue";
 
 const { t } = useI18n();
 
@@ -41,6 +42,10 @@ store.loadToday();
           loop
           src="https://lottie.host/33c61a41-93f5-436b-8f20-61dcf295e4bc/vesyqtdGcX.lottie"
         />
+
+        <template #fallback>
+          <span class="block size-48 md:size-54 rounded-full bg-accent/50" />
+        </template>
       </ClientOnly>
 
       <div class="grid gap-1 text-center">
@@ -52,15 +57,32 @@ store.loadToday();
         </p>
       </div>
 
-      <Button class="mt-4">
-        {{ heroSection.action }}
-        <Rocket />
-      </Button>
+      <AddMoodBoardEntryDialog>
+        <Button class="mt-4">
+          {{ heroSection.action }}
+          <Rocket />
+        </Button>
+      </AddMoodBoardEntryDialog>
     </section>
     <section
       id="entries-table"
-      class="border rounded-md"
+      class="grid border rounded-md overflow-auto"
     >
+      <header class="p-2 border-b flex items-center gap-2">
+        <Input
+          class="flex-1"
+          disabled
+        />
+        <Button
+          variant="outline"
+          as-child
+        >
+          <NuxtLinkLocale to="/app/moodboard/history">
+            <History />
+            {{ $t("btn.history") }}
+          </NuxtLinkLocale>
+        </Button>
+      </header>
       <MoodBoardEntriesTable
         :data="todayEntries"
         :loading="loading && store.isTodayFirstLoading"

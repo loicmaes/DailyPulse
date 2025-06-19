@@ -1,5 +1,5 @@
 import { toast } from "vue-sonner";
-import type { IMoodEntry } from "~/types/moods";
+import type { IMoodEntry, IMoodEntryCreate } from "~/types/moods";
 import type { ListResult } from "~/types/utils/globals";
 
 interface MoodBoardState {
@@ -81,6 +81,28 @@ export const useMoodBoardStore = defineStore("moodBoard", {
         },
         error: () => this.translate("toasts.mood-board.remove-entry.error"),
       });
+    },
+    async addEntry(body: IMoodEntryCreate): Promise<boolean> {
+      this.loading = true;
+
+      try {
+        const entry = await $fetch<IMoodEntry>("/api/moodboard/entries", {
+          method: "POST",
+          body,
+        });
+        this.todayEntries = [entry, ...this.todayEntries];
+        this.historyEntries = [entry, ...this.historyEntries];
+
+        toast.success(this.translate("mood-board.add-entry-dialog.toasts.success"));
+        return true;
+      }
+      catch {
+        toast.error(this.translate("toasts.errors.internal-server-error"));
+        return false;
+      }
+      finally {
+        this.loading = false;
+      }
     },
   },
 });
