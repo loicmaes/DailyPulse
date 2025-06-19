@@ -9,9 +9,10 @@ import type { ListQuery } from "~/types/utils/globals";
 
 export async function addEntry(event: HttpEvent) {
   const body = await readBody<IMoodEntryCreate>(event);
+  const user = event.context.user;
 
   try {
-    const entry = await moodEntries.create(body);
+    const entry = await moodEntries.create({ ...body, userId: user.id });
 
     setOutput(event, StatusCode.CREATED, "Mood entry saved to your mood board.");
     return entry;
@@ -23,7 +24,7 @@ export async function addEntry(event: HttpEvent) {
 
 export async function removeEntry(event: HttpEvent) {
   const user = event.context.user;
-  const id = getRouterParam(event, "moodEntryId");
+  const id = getRouterParam(event, "entryId");
 
   if (!id) return handleException(event, new BadRequestException("Mood entry id is missing!"));
 

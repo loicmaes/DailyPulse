@@ -1,14 +1,14 @@
-import type { IMoodEntry, IMoodEntryCreate } from "~/types/moods";
+import type { IMoodEntry, IBackMoodEntryCreate } from "~/types/moods";
 import prisma from "~/prisma";
 import { EntityNotFoundException } from "~/types/utils/exceptions";
 import type { ListQuery, ListResult } from "~/types/utils/globals";
 
 /**
  * Create an entry to your personal mood board
- * @param {IMoodEntryCreate} data - Entry data
+ * @param {IBackMoodEntryCreate} data - Entry data
  * @returns {IMoodEntry} the created entry
  */
-export async function create(data: IMoodEntryCreate): Promise<IMoodEntry> {
+export async function create(data: IBackMoodEntryCreate): Promise<IMoodEntry> {
   return prisma.moodEntry.create({
     data,
   });

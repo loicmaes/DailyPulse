@@ -8,4 +8,5 @@ export interface IMoodEntry {
   createdAt: Date;
 }
 
-export type IMoodEntryCreate = Omit<IMoodEntry, "id" | "createdAt">;
+export type IBackMoodEntryCreate = Omit<IMoodEntry, "id" | "createdAt">;
+export type IMoodEntryCreate = Omit<IBackMoodEntryCreate, "userId">;
