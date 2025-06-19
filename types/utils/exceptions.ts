@@ -15,6 +15,12 @@ export class BadRequestException extends DailyException {
   }
 }
 
+export class ConflictException extends DailyException {
+  constructor(message?: string) {
+    super(StatusCode.CONFLICT, message);
+  }
+}
+
 export class EntityNotFoundException extends DailyException {
   constructor(message?: string) {
     super(StatusCode.NOT_FOUND, message ?? "Entity not found!");

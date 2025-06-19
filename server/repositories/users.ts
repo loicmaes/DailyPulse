@@ -1,7 +1,8 @@
 import argon2 from "argon2";
+import type { Prisma } from "@prisma/client";
 import prisma from "~/prisma";
 import type { IBackUser, IUser, IUserCreate, IUserUpdate } from "~/types/user";
-import { EntityNotFoundException } from "~/types/utils/exceptions";
+import { ConflictException, EntityNotFoundException } from "~/types/utils/exceptions";
 
 /**
  * Remove password from json data
@@ -18,14 +19,25 @@ export function reduceUser(user: IBackUser): IUser {
  * Create a user
  * @param {IUserCreate} data - New user data
  * @returns {IBackUser} Created user data
+ * @throws {ConflictException} If the user's email is already used
  */
 export async function create(data: IUserCreate): Promise<IBackUser> {
-  return prisma.user.create({
-    data: {
-      ...data,
-      password: await argon2.hash(data.password),
-    },
-  });
+  try {
+    return await prisma.user.create({
+      data: {
+        ...data,
+        password: await argon2.hash(data.password),
+      },
+    });
+  }
+  catch (e) {
+    switch ((e as Prisma.PrismaClientKnownRequestError).code) {
+      case "P2002":
+        throw new ConflictException();
+      default:
+        throw e;
+    }
+  }
 }
 
 /**
