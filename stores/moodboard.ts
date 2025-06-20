@@ -33,6 +33,9 @@ export const useMoodBoardStore = defineStore("moodBoard", {
             page,
             perPage,
           },
+          headers: {
+            LocalNow: new Date().getTime().toString(),
+          },
         });
         if (!data.value) return;
 

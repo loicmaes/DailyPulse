@@ -40,19 +40,19 @@ export async function removeEntry(event: HttpEvent) {
 }
 
 export async function recoverTodayMoodBoard(event: HttpEvent) {
-  const now = new Date();
-  const start = new Date(Date.UTC(
+  const localNow = getHeader(event, "LocalNow");
+
+  const now = localNow ? new Date(Number(localNow)) : new Date();
+  const start = new Date(
     now.getUTCFullYear(),
     now.getUTCMonth(),
     now.getUTCDate(),
-    0, 0, 0,
-  ));
-  const end = new Date(Date.UTC(
+    0, 0, 0);
+  const end = new Date(
     now.getUTCFullYear(),
     now.getUTCMonth(),
     now.getUTCDate() + 1,
-    0, 0, 0,
-  ));
+    0, 0, 0);
 
   const user = event.context.user;
   const query = getQuery<Omit<ListQuery, "period">>(event);
