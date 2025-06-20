@@ -1,7 +1,7 @@
 {
   "name": "daily-pulse",
   "description": "Daily Pulse",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Loïc MAES",
   "private": true,
   "type": "module",
@@ -27,7 +27,9 @@
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "add:component": "tsx ./scripts/shadcn-add.ts",
+    "add:module": "tsx ./scripts/nuxt-module-add.ts"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-vue": "^0.7.1",
@@ -65,6 +67,7 @@
   "devDependencies": {
     "@types/luxon": "^3.6.2",
     "prisma": "^6.10.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "vite-plugin-eslint2": "^5.0.3"
   }
