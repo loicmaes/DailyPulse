@@ -19,60 +19,62 @@ const table = computed(() => {
 </script>
 
 <template>
-  <Table>
-    <TableHeader>
-      <TableRow
-        v-for="headerGroup in table.getHeaderGroups()"
-        :key="headerGroup.id"
-      >
-        <TableHead
-          v-for="header in headerGroup.headers"
-          :key="header.id"
-        >
-          <FlexRender
-            v-if="!header.isPlaceholder"
-            :render="header.column.columnDef.header"
-            :props="header.getContext()"
-          />
-        </TableHead>
-      </TableRow>
-    </TableHeader>
-
-    <TableBody>
-      <template v-if="table.getRowModel().rows?.length">
+  <div class="overflow-x-auto">
+    <Table>
+      <TableHeader>
         <TableRow
-          v-for="row in table.getRowModel().rows"
-          :key="row.id"
+          v-for="headerGroup in table.getHeaderGroups()"
+          :key="headerGroup.id"
         >
-          <TableCell
-            v-for="cell in row.getVisibleCells()"
-            :key="cell.id"
+          <TableHead
+            v-for="header in headerGroup.headers"
+            :key="header.id"
           >
             <FlexRender
-              :render="cell.column.columnDef.cell"
-              :props="cell.getContext()"
+              v-if="!header.isPlaceholder"
+              :render="header.column.columnDef.header"
+              :props="header.getContext()"
             />
-          </TableCell>
+          </TableHead>
         </TableRow>
-      </template>
-      <template v-else>
-        <TableRow v-if="loading">
-          <TableCell
-            :colspan="columns.length"
-            class="h-24 text-center text-muted-foreground"
+      </TableHeader>
+
+      <TableBody>
+        <template v-if="table.getRowModel().rows?.length">
+          <TableRow
+            v-for="row in table.getRowModel().rows"
+            :key="row.id"
           >
-            <slot name="loading-text" />
-          </TableCell>
-        </TableRow>
-        <TableRow v-else>
-          <TableCell
-            :colspan="columns.length"
-            class="h-24 text-center text-muted-foreground"
-          >
-            <slot name="empty" />
-          </TableCell>
-        </TableRow>
-      </template>
-    </TableBody>
-  </Table>
+            <TableCell
+              v-for="cell in row.getVisibleCells()"
+              :key="cell.id"
+            >
+              <FlexRender
+                :render="cell.column.columnDef.cell"
+                :props="cell.getContext()"
+              />
+            </TableCell>
+          </TableRow>
+        </template>
+        <template v-else>
+          <TableRow v-if="loading">
+            <TableCell
+              :colspan="columns.length"
+              class="h-24 text-center text-muted-foreground"
+            >
+              <slot name="loading-text" />
+            </TableCell>
+          </TableRow>
+          <TableRow v-else>
+            <TableCell
+              :colspan="columns.length"
+              class="h-24 text-center text-muted-foreground"
+            >
+              <slot name="empty" />
+            </TableCell>
+          </TableRow>
+        </template>
+      </TableBody>
+    </Table>
+  </div>
 </template>

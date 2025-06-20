@@ -66,32 +66,33 @@ store.loadToday();
     </section>
     <section
       id="entries-table"
-      class="grid border rounded-md overflow-auto"
     >
-      <header class="p-2 border-b flex items-center gap-2">
-        <div class="relative flex-1">
-          <Input
-            class="pl-8"
-            :placeholder="$t('labels.search')"
-            disabled
-          />
-          <Search class="size-4 absolute top-2.5 left-2.5 text-muted-foreground" />
-        </div>
-        <Button
-          variant="outline"
-          as-child
-        >
-          <NuxtLinkLocale to="/app/moodboard/history">
-            <History />
-            {{ $t("btn.history") }}
-          </NuxtLinkLocale>
-        </Button>
-      </header>
-      <MoodBoardEntriesTable
-        :data="todayEntries"
-        :loading="loading && store.isTodayFirstLoading"
-        today
-      />
+      <Card class="p-0 gap-0 grid">
+        <header class="p-2 border-b flex items-center gap-2">
+          <div class="relative flex-1">
+            <Input
+              class="pl-8"
+              :placeholder="$t('labels.search')"
+              disabled
+            />
+            <Search class="size-4 absolute top-2.5 left-2.5 text-muted-foreground" />
+          </div>
+          <Button
+            variant="outline"
+            as-child
+          >
+            <NuxtLinkLocale to="/app/moodboard/history">
+              <History />
+              {{ $t("btn.history") }}
+            </NuxtLinkLocale>
+          </Button>
+        </header>
+        <MoodBoardEntriesTable
+          :data="todayEntries"
+          :loading="loading && store.isTodayFirstLoading"
+          today
+        />
+      </Card>
     </section>
   </main>
 </template>
