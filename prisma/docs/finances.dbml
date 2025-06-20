@@ -1,0 +1,39 @@
+Enum TransactionType {
+  expense
+  income
+}
+Enum Frequency {
+  daily
+  weekly
+  monthly
+  yearly
+}
+
+Table Transaction {
+  id uuid pk
+  userId uuid [ref: > User.id]
+  type TransactionType
+  label string
+  amount float
+  date date
+  note string [null]
+  recurringId uuid [null, ref: > RecurringTransaction.id]
+  createdAt datetime
+  updatedAt datetime
+}
+
+Table RecurringTransaction {
+  id uuid pk
+  userId uuid [ref: > User.id]
+  type TransactionType
+  label string
+  amount float
+  startDate date
+  endDate date [null]
+  nextDueDate date
+  frequency Frequency
+  note string [null]
+  active boolean [default: true]
+  createdAt datetime
+  updatedAt datetime
+}

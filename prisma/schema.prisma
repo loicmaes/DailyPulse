@@ -18,6 +18,7 @@ model User {
 
   authSessions AuthSession[]
   moodEntries  MoodEntry[]
+  Transaction  Transaction[]
 
   @@map("users")
 }
@@ -47,4 +48,26 @@ model MoodEntry {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("mood_entries")
+}
+
+// Finances
+enum TransactionType {
+  expense
+  income
+}
+
+model Transaction {
+  id        String          @id @default(uuid())
+  userId    String
+  type      TransactionType
+  label     String
+  amount    Float
+  date      DateTime        @db.Date
+  note      String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
 }
