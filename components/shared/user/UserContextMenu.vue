@@ -4,9 +4,9 @@ import { CircleQuestionMark, Settings, LogOut, User } from "lucide-vue-next";
 const store = useUserStore();
 const { user } = storeToRefs(store);
 
-function logout() {
-  store.logout();
-  navigateTo(useLocalePath()("/auth/login"));
+async function logout() {
+  await store.logout();
+  navigateTo(useLocalePath()("/"));
 }
 </script>
 

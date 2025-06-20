@@ -70,13 +70,16 @@ export const useUserStore = defineStore("user", {
       }
     },
     async logout() {
-      toast.promise($fetch<IUser>("/api/auth/logout", {
-        method: "DELETE",
-      }), {
-        loading: this.translate("toasts.auth.logout.loading"),
-        success: this.translate("toasts.auth.logout.success"),
-        error: this.translate("toasts.auth.logout.error"),
-      });
+      try {
+        await $fetch<IUser>("/api/auth/logout", {
+          method: "DELETE",
+        });
+        this.user = null;
+        toast.success(this.translate("toasts.auth.logout.success"));
+      }
+      catch {
+        toast.error(this.translate("toasts.auth.logout.error"));
+      }
     },
   },
 });
