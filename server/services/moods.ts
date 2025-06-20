@@ -43,16 +43,8 @@ export async function recoverTodayMoodBoard(event: HttpEvent) {
   const localNow = getHeader(event, "LocalNow");
 
   const now = localNow ? new Date(Number(localNow)) : new Date();
-  const start = new Date(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    0, 0, 0);
-  const end = new Date(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate() + 1,
-    0, 0, 0);
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
 
   const user = event.context.user;
   const query = getQuery<Omit<ListQuery, "period">>(event);
