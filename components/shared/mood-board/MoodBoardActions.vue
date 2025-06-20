@@ -10,10 +10,8 @@ const props = defineProps<{
 }>();
 
 const store = useMoodBoardStore();
+const { copy } = useClipboard();
 
-async function copy() {
-  await navigator.clipboard.writeText(props.entry.id);
-}
 async function confirmDelete() {
   await store.removeEntry(props.entry);
 }
@@ -32,7 +30,7 @@ async function confirmDelete() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <!-- TODO: display if developer options are enabled -->
-        <DropdownMenuItem @click="copy">
+        <DropdownMenuItem @click="copy(entry.id)">
           <Copy />
           {{ $t("btn.copy-reference") }}
         </DropdownMenuItem>
