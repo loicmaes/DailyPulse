@@ -62,6 +62,9 @@ export async function getAll(userId: string, query?: ListQuery): Promise<ListRes
         lte: query?.period?.end ?? new Date(),
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
     take: limit,
     skip: offset,
   });
