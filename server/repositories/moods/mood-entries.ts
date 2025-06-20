@@ -52,6 +52,7 @@ export async function find(id: string, userId: string): Promise<IMoodEntry> {
 /**
  * Count all user's entries
  * @param {string} userId - User unique id
+ * @param {ListQuery["period"] | undefined} period - Set a period to recover data
  * @returns {number} the total number of registered entries
  */
 export async function getTotalUserEntries(userId: string, period?: ListQuery["period"]): Promise<number> {
@@ -79,7 +80,7 @@ export async function getUserEntries(userId: string, query?: ListQuery): Promise
       userId,
       createdAt: {
         gte: query?.period?.start ?? new Date(1970, 0, 1, 0, 0, 0),
-        lt: query?.period?.end ?? new Date(),
+        lt: query?.period?.end ?? new Date(Date.now() + 1000),
       },
     },
     orderBy: {
