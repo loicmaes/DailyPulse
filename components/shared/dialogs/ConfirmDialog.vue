@@ -12,20 +12,20 @@ defineEmits<{
       <AlertDialogHeader>
         <AlertDialogTitle>
           <slot name="title">
-            Title
+            {{ $t("dialogs.confirm.title") }}
           </slot>
         </AlertDialogTitle>
         <AlertDialogDescription>
           <slot name="caption">
-            Caption
+            {{ $t("dialogs.confirm.caption") }}
           </slot>
         </AlertDialogDescription>
       </AlertDialogHeader>
 
       <AlertDialogFooter>
-        <AlertDialogCancel>Annuler</AlertDialogCancel>
+        <AlertDialogCancel>{{ $t("btn.cancel") }}</AlertDialogCancel>
         <AlertDialogAction @click="$emit('confirmed')">
-          Confirmer
+          {{ $t("btn.confirm") }}
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>

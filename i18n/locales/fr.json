@@ -6,6 +6,12 @@
     "copy-reference": "Copier la référence",
     "delete": "Supprimer"
   },
+  "dialogs": {
+    "confirm": {
+      "title": "Sûr de toi ?",
+      "caption": "Es-tu sûr de vouloir faire ça ? Cette action est définitive."
+    }
+  },
   "labels": {
     "optional": "(facultatif)",
     "search": "Rechercher..."
@@ -150,6 +156,56 @@
         },
         "history": {
           "title": "Historique"
+        }
+      }
+    },
+    "finances": {
+      "dashboard": {
+        "title": "Ta boussole budget",
+        "caption": "Garde un œil sur tes dépenses et revenus, sans pression.",
+        "action": {
+          "label": "Nouvelle transaction",
+          "options": {
+            "new-income": "Nouveau revenu",
+            "new-expense": "Nouvelle dépense"
+          }
+        },
+        "dialogs": {
+          "confirm-delete": "Es-tu sûr de vouloir supprimer cette transaction ? Cette action est irréversible.",
+          "new-transaction": {
+            "title": "Nouveau revenu | Nouvelle dépense",
+            "fields": {
+              "label": "Libellé",
+              "amount": "Montant",
+              "date": "Effectuée le",
+              "note": "Note"
+            },
+            "action": "Ajouter la transaction"
+          }
+        },
+        "toasts": {
+          "remove-transaction": {
+            "loading": "Suppression de la transaction...",
+            "success": "Done ! La transaction a été définitivement supprimée.",
+            "error": "Oups... Je n'ai pas réussi à supprimer la transaction."
+          }
+        },
+        "stats": {
+          "monthly-subscriptions": "Abonnements mensuels",
+          "annually-subscriptions": "Abonnements annuels",
+          "savings": "Économies réalisées"
+        },
+        "table": {
+          "headers": {
+            "label": "Libellé",
+            "note": "Note",
+            "amount": "Montant",
+            "saved-at": "Enregistrée le"
+          },
+          "statements": {
+            "loading-data": "Chargement des transactions...",
+            "no-data": "Aucune transaction enregistrée pour le moment..."
+          }
         }
       }
     }
