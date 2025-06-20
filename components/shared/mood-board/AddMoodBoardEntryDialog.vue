@@ -5,6 +5,10 @@ import { z } from "zod";
 
 const store = useMoodBoardStore();
 const open = defineModel<boolean>("open");
+watch(open, (val) => {
+  if (!val) return;
+  resetForm();
+});
 
 const { list: moods } = useMood();
 
@@ -20,11 +24,7 @@ const { handleSubmit, resetForm } = useForm({
 const submit = handleSubmit(async (values) => {
   const state = await store.addEntry(values);
 
-  if (!state) {
-    resetForm();
-    return;
-  }
-
+  if (!state) return;
   open.value = false;
 });
 </script>
@@ -37,8 +37,8 @@ const submit = handleSubmit(async (values) => {
 
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{{ $t("mood-board.add-entry-dialog.title") }}</DialogTitle>
-        <DialogDescription>{{ $t("mood-board.add-entry-dialog.caption") }}</DialogDescription>
+        <DialogTitle>{{ $t("app.mood-board.dialogs.add-entry.title") }}</DialogTitle>
+        <DialogDescription>{{ $t("app.mood-board.dialogs.add-entry.caption") }}</DialogDescription>
       </DialogHeader>
 
       <form
@@ -50,7 +50,7 @@ const submit = handleSubmit(async (values) => {
           name="mood"
         >
           <FormItem>
-            <FormLabel>{{ $t("mood-board.add-entry-dialog.fields.mood") }}</FormLabel>
+            <FormLabel>{{ $t("app.mood-board.dialogs.add-entry.fields.mood") }}</FormLabel>
             <FormControl v-bind="componentField">
               <Select>
                 <SelectTrigger class="w-full">
@@ -75,11 +75,11 @@ const submit = handleSubmit(async (values) => {
           name="note"
         >
           <FormItem>
-            <FormLabel>{{ $t("mood-board.add-entry-dialog.fields.note.label") }} <span class="text-xs text-muted-foreground">{{ $t("labels.optional") }}</span></FormLabel>
+            <FormLabel>{{ $t("app.mood-board.dialogs.add-entry.fields.note.label") }} <span class="text-xs text-muted-foreground">{{ $t("labels.optional") }}</span></FormLabel>
             <FormControl v-bind="componentField">
               <Input />
             </FormControl>
-            <FormDescription>{{ $t("mood-board.add-entry-dialog.fields.note.caption") }}</FormDescription>
+            <FormDescription>{{ $t("app.mood-board.dialogs.add-entry.fields.note.caption") }}</FormDescription>
           </FormItem>
         </FormField>
 
@@ -92,7 +92,7 @@ const submit = handleSubmit(async (values) => {
               {{ $t("btn.cancel") }}
             </Button>
             <Button type="submit">
-              {{ $t("mood-board.add-entry-dialog.btn.add") }}
+              {{ $t("app.mood-board.dialogs.add-entry.action") }}
             </Button>
           </DialogClose>
         </DialogFooter>
