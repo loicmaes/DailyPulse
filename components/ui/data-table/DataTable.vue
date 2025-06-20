@@ -61,7 +61,7 @@ const table = computed(() => {
             :colspan="columns.length"
             class="h-24 text-center text-muted-foreground"
           >
-            {{ $t("labels.loading-data") }}
+            <slot name="loading-text" />
           </TableCell>
         </TableRow>
         <TableRow v-else>
@@ -69,7 +69,7 @@ const table = computed(() => {
             :colspan="columns.length"
             class="h-24 text-center text-muted-foreground"
           >
-            {{ $t("labels.no-data") }}
+            <slot name="empty" />
           </TableCell>
         </TableRow>
       </template>

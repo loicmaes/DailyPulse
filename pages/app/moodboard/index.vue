@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
-import { Rocket, History } from "lucide-vue-next";
+import { Rocket, History, Search } from "lucide-vue-next";
 import MoodBoardEntriesTable from "~/components/shared/mood-board/MoodBoardEntriesTable.vue";
 import AddMoodBoardEntryDialog from "~/components/shared/mood-board/AddMoodBoardEntryDialog.vue";
 
@@ -17,9 +17,9 @@ const { loading, todayEntries } = storeToRefs(store);
 const heroSection = computed(() => {
   const index = Math.floor(Math.random() * 5);
   return {
-    title: t(`mood-board.add-section[${index}].title`),
-    caption: t(`mood-board.add-section[${index}].caption`),
-    action: t(`mood-board.add-section[${index}].action`),
+    title: t(`app.mood-board.sections.new-entry.options[${index}].title`),
+    caption: t(`app.mood-board.sections.new-entry.options[${index}].caption`),
+    action: t(`app.mood-board.sections.new-entry.options[${index}].action`),
   };
 });
 
@@ -69,10 +69,14 @@ store.loadToday();
       class="grid border rounded-md overflow-auto"
     >
       <header class="p-2 border-b flex items-center gap-2">
-        <Input
-          class="flex-1"
-          disabled
-        />
+        <div class="relative flex-1">
+          <Input
+            class="pl-8"
+            :placeholder="$t('labels.search')"
+            disabled
+          />
+          <Search class="size-4 absolute top-2.5 left-2.5 text-muted-foreground" />
+        </div>
         <Button
           variant="outline"
           as-child

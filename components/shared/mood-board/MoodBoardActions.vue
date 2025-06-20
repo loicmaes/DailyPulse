@@ -34,14 +34,14 @@ async function confirmDelete() {
         <!-- TODO: display if developer options are enabled -->
         <DropdownMenuItem @click="copy">
           <Copy />
-          {{ $t("mood-board.actions.copy-id") }}
+          {{ $t("btn.copy-reference") }}
         </DropdownMenuItem>
         <DropdownMenuItem
           variant="destructive"
           @click="deleteConfirm = true"
         >
           <Trash />
-          {{ $t("mood-board.actions.delete") }}
+          {{ $t("btn.delete") }}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -49,6 +49,13 @@ async function confirmDelete() {
     <ConfirmDialog
       v-model:open="deleteConfirm"
       @confirmed="confirmDelete"
-    />
+    >
+      <template #title>
+        {{ $t("app.mood-board.dialogs.confirm-deletion.title") }}
+      </template>
+      <template #caption>
+        {{ $t("app.mood-board.dialogs.confirm-deletion.caption") }}
+      </template>
+    </ConfirmDialog>
   </div>
 </template>

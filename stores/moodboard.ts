@@ -72,14 +72,14 @@ export const useMoodBoardStore = defineStore("moodBoard", {
       toast.promise($fetch<IMoodEntry>(`/api/moodboard/entries/${entry.id}`, {
         method: "DELETE",
       }), {
-        loading: this.translate("toasts.mood-board.remove-entry.loading"),
+        loading: this.translate("app.mood-board.toasts.remove-entry.loading"),
         success: (e: IMoodEntry) => {
           this.todayEntries = this.todayEntries.filter(entity => entity.id !== e.id);
           this.historyEntries = this.historyEntries.filter(entity => entity.id !== e.id);
 
-          return this.translate("toasts.mood-board.remove-entry.success");
+          return this.translate("app.mood-board.toasts.remove-entry.success");
         },
-        error: () => this.translate("toasts.mood-board.remove-entry.error"),
+        error: () => this.translate("app.mood-board.toasts.remove-entry.error"),
       });
     },
     async addEntry(body: IMoodEntryCreate): Promise<boolean> {
@@ -93,7 +93,7 @@ export const useMoodBoardStore = defineStore("moodBoard", {
         this.todayEntries = [entry, ...this.todayEntries];
         this.historyEntries = [entry, ...this.historyEntries];
 
-        toast.success(this.translate("mood-board.add-entry-dialog.toasts.success"));
+        toast.success(this.translate("app.mood-board.toasts.entry-added"));
         return true;
       }
       catch {

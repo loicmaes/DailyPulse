@@ -29,18 +29,18 @@ async function logout() {
       <DropdownMenuGroup>
         <DropdownMenuItem>
           <User />
-          Mon profil
+          {{ $t("app.user-context.profile") }}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Settings />
-          Paramètres
+          {{ $t("app.user-context.settings") }}
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem>
           <CircleQuestionMark />
-          Obtenir de l'aide
+          {{ $t("app.user-context.getting-help") }}
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
@@ -50,7 +50,7 @@ async function logout() {
           @click="logout"
         >
           <LogOut />
-          Déconnexion
+          {{ $t("app.user-context.log-out") }}
         </DropdownMenuItem>
       </DropdownMenuGroup>
     </DropdownMenuContent>

@@ -14,5 +14,12 @@ defineProps<{
     :columns="columns(today)"
     :data="data"
     :loading="loading"
-  />
+  >
+    <template #loading-text>
+      {{ $t("app.mood-board.sections.new-entry.table.loading-data") }}
+    </template>
+    <template #empty>
+      {{ $t("app.mood-board.sections.new-entry.table.no-data") }}
+    </template>
+  </DataTable>
 </template>

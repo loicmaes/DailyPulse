@@ -29,7 +29,7 @@ store.loadHistory();
         </NuxtLinkLocale>
       </Button>
       <h2 class="text-2xl font-bold">
-        {{ $t("mood-board.history.title") }}
+        {{ $t("app.mood-board.sections.history.title") }}
       </h2>
     </header>
     <div class="border rounded-md overflow-auto">

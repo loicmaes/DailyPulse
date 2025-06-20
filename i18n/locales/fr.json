@@ -1,54 +1,21 @@
 {
-  "toasts": {
-    "errors": {
-      "internal-server-error": "Oups, une erreur interne est survenue..."
-    },
-    "auth": {
-      "login": {
-        "success": "Hey {username}, ravi de te revoir !",
-        "error": "Oups... Vérifie tes identifiants."
-      },
-      "register": {
-        "success": "Hey {username}, bienvenue sur DailyPulse !",
-        "error": "Oups... Impossible de créer ton compte."
-      },
-      "logout": {
-        "loading": "Déconnexion...",
-        "success": "Tu as bien été déconnecté !",
-        "error": "Oups... Je n'ai pas réussi à te déconnecter"
-      }
-    },
-    "mood-board": {
-      "remove-entry": {
-        "loading": "Suppression de l'entrée...",
-        "success": "Yes ! L'entrée a été supprimée de ma base de donnée.",
-        "error": "Oups... Je n'arrive pas à supprimer cette entrée."
-      }
-    }
-  },
-  "labels": {
-    "optional": "(facultatif)",
-    "no-data": "Aucune données...",
-    "loading-data": "Chargement des données..."
-  },
   "btn": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
-    "history": "Historique"
+    "history": "Historique",
+    "copy-reference": "Copier la référence",
+    "delete": "Supprimer"
+  },
+  "labels": {
+    "optional": "(facultatif)",
+    "search": "Rechercher..."
+  },
+  "toasts": {
+    "errors": {
+      "internal-server-error": "Oups, une erreur interne est survenue..."
+    }
   },
   "auth": {
-    "login": {
-      "title": "Connexion",
-      "caption": "Les petits pas font les plus grandes réussites.",
-      "btn": {
-        "login": "Me connecter",
-        "not-registered": "Je n'ai pas de compte"
-      },
-      "fields": {
-        "email": "Adresse e-mail",
-        "password": "Mot de passe"
-      }
-    },
     "register": {
       "title": "Inscription",
       "caption": "Prends ta vie en main dès maintenant !",
@@ -74,65 +41,117 @@
             "lower": "Doit contenir au moins une minuscule",
             "upper": "Doit contenir au moins une majuscule",
             "digit": "Doit contenir au moins un chiffre",
-            "special": "Doit contenit au moins un caractère spécial",
+            "special": "Doit contenir au moins un caractère spécial",
             "length": "Doit faire entre 8 et 32 caractères"
           }
         }
       },
-      "terms": "En cliquant sur \"Créer mon compte\", tu acceptes nos conditions d'utilisation"
+      "terms": "En cliquant sur \"Créer mon compte\", tu acceptes nos conditions d'utilisation",
+      "toasts": {
+        "success": "Hey {username}, bienvenue sur DailyPulse !",
+        "error": "Oups... Impossible de créer ton compte."
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "caption": "Les petits pas font les plus grandes réussites.",
+      "btn": {
+        "login": "Me connecter",
+        "not-registered": "Je n'ai pas de compte"
+      },
+      "fields": {
+        "email": "Adresse e-mail",
+        "password": "Mot de passe"
+      },
+      "toasts": {
+        "success": "Hey {username}, ravi de te revoir !",
+        "error": "Oups... Vérifie tes identifiants."
+      }
+    },
+    "logout": {
+      "toasts": {
+        "loading": "Déconnexion...",
+        "success": "Tu as bien été déconnecté !",
+        "error": "Oups... Je n'ai pas réussi à te déconnecter."
+      }
     }
   },
-  "mood-board": {
-    "actions": {
-      "copy-id": "Copier l'identifiant",
-      "delete": "Supprimer l'entrée"
+  "app": {
+    "user-context": {
+      "profile": "Mon profil",
+      "settings": "Paramètres",
+      "getting-help": "Obtenir de l'aide",
+      "log-out": "Déconnexion"
     },
-    "add-section": [
-      {
-        "title": "Dis-moi comment tu te sens",
-        "caption": "Une petite note rapide, et je m’occupe du reste. Tu auras ton résumé ce soir ✨",
-        "action": "Ajouter mon mood"
-      },
-      {
-        "title": "Un petit instant pour toi ?",
-        "caption": "Note ton humeur du moment, je te ferai un résumé ce soir à minuit \uD83C\uDF19",
-        "action": "Enregistrer mon humeur"
-      },
-      {
-        "title": "Balance ton mood !",
-        "caption": "3 secondes chrono pour noter comment tu te sens. Je t’enverrai un récap ce soir \uD83E\uDDE0",
-        "action": "Let’s go"
-      },
-      {
-        "title": "Comment tu te sens ?",
-        "caption": "Note-le, et je te ferai un petit retour ce soir \uD83D\uDC8C",
-        "action": "Noter mon humeur"
-      },
-      {
-        "title": "Et là, tout de suite, ça va ?",
-        "caption": "Un mot, une note, un emoji — dis-moi tout ! Je te résumerai ta journée ce soir \uD83C\uDF1C",
-        "action": "Exprimer mon mood"
-      }
-    ],
-    "add-entry-dialog": {
-      "title": "Nouvelle entrée",
-      "caption": "En 10 secondes, tu peux dire comment tu te sens. Le toi de ce soir te dira merci.",
-      "fields": {
-        "mood": "Humeur",
-        "note": {
-          "label": "Commentaire",
-          "caption": "Décris ton humeur en quelques mots"
+    "navigation": {
+      "mood-board": "Humeur",
+      "finances": "Finances"
+    },
+    "mood-board": {
+      "dialogs": {
+        "add-entry": {
+          "title": "Nouvelle entrée",
+          "caption": "En 10 secondes, tu peux dire comment tu te sens. Le toi de ce soir te dira merci.",
+          "fields": {
+            "mood": "Humeur",
+            "note":{
+              "label": "Commentaire",
+              "caption": "Décris ton humeur en quelques mots"
+            }
+          },
+          "action": "Ajouter au mood board"
+        },
+        "confirm-deletion": {
+          "title": "Sûr de toi ?",
+          "caption": "Es-tu sûr de vouloir supprimer cette entrée ? Cette action est irréversible !"
         }
       },
       "toasts": {
-        "success": "Done ! J'ai ajouté l'action à ton Mood Board."
+        "entry-added": "Done ! J'ai ajouté l'action à ton Mood Board.",
+        "remove-entry": {
+          "loading": "Suppression de l'entrée...",
+          "success": "Yes ! L'entrée a été supprimée de ma base de donnée.",
+          "error": "Oups... Je n'arrive pas à supprimer cette entrée."
+        }
       },
-      "btn": {
-        "add": "Ajouter au mood board"
+      "sections": {
+        "new-entry": {
+          "options": [
+            {
+              "title": "Dis-moi comment tu te sens",
+              "caption": "Une petite note rapide, et je m'occupe du reste. Tu auras ton résumé ce soir ✨",
+              "action": "Ajouter mon mood"
+            },
+            {
+              "title": "Un petit instant pour toi ?",
+              "caption": "Note ton humeur du moment, je te ferais un résumé ce soir à minuit \uD83C\uDF19",
+              "action": "Enregistrer mon humeur"
+            },
+            {
+              "title": "Balance ton mood !",
+              "caption": "3 secondes chrono pour noter comment tu te sens. Je t'enverrai un récap ce soir \uD83E\uDDE0",
+              "action": "Let's go"
+            },
+            {
+              "title": "Comment tu te sens ?",
+              "caption": "Note-le, et je te ferai un petit retour ce soir \uD83D\uDC8C",
+              "action": "Noter mon humeur"
+            },
+            {
+              "title": "Et là, tout de suite, ça va ?",
+              "caption": "Un mot, une note, un emoji — dis-moi tout ! Je te résumerai ta journée ce soir \uD83C\uDF1C",
+              "action": "Exprimer mon mood"
+            }
+          ],
+          "table": {
+            "loading-data": "Chargement des entrées...",
+            "no-data": "Aucune entrée enregistrée pour le moment..."
+          }
+        },
+        "history": {
+          "title": "Historique"
+        }
       }
-    },
-    "history": {
-      "title": "Historique"
     }
   }
 }

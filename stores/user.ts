@@ -23,8 +23,8 @@ export const useUserStore = defineStore("user", {
         if (!data.value) return;
         this.user = data.value;
       }
-      catch (e) {
-        console.error(e);
+      catch {
+        toast.error(this.translate("toasts.errors.internal-server-error"));
       }
     },
     async login(body: IUserLogin): Promise<boolean> {
@@ -37,11 +37,11 @@ export const useUserStore = defineStore("user", {
         });
 
         this.user = user;
-        toast.success(this.translate("toasts.auth.login.success", { username: user.username }));
+        toast.success(this.translate("auth.login.toasts.success", { username: user.username }));
         return true;
       }
       catch {
-        toast.error(this.translate("toasts.auth.login.error"));
+        toast.error(this.translate("auth.login.toasts.error"));
         return false;
       }
       finally {
@@ -58,11 +58,11 @@ export const useUserStore = defineStore("user", {
         });
 
         this.user = user;
-        toast.success(this.translate("toasts.auth.register.success", { username: user.username }));
+        toast.success(this.translate("auth.register.toasts.success", { username: user.username }));
         return true;
       }
       catch {
-        toast.error(this.translate("toasts.auth.register.error"));
+        toast.error(this.translate("auth.register.toasts.error"));
         return false;
       }
       finally {
@@ -75,10 +75,10 @@ export const useUserStore = defineStore("user", {
           method: "DELETE",
         });
         this.user = null;
-        toast.success(this.translate("toasts.auth.logout.success"));
+        toast.success(this.translate("auth.logout.toasts.success"));
       }
       catch {
-        toast.error(this.translate("toasts.auth.logout.error"));
+        toast.error(this.translate("auth.logout.toasts.error"));
       }
     },
   },
