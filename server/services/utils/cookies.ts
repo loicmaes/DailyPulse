@@ -32,3 +32,7 @@ export function clearAuthCookies(event: HttpEvent) {
   deleteCookie(event, TOKEN_COOKIE);
   deleteCookie(event, USER_COOKIE);
 }
+
+export function getUserTimezone(event: HttpEvent): string {
+  return getCookie(event, "timezone") ?? "UTC";
+}

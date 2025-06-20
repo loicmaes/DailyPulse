@@ -7,6 +7,8 @@ import type { DailyException } from "~/types/utils/exceptions";
 import { BadRequestException } from "~/types/utils/exceptions";
 import type { ListQuery } from "~/types/utils/globals";
 import { getTodayRangeForTimezone } from "~/server/services/utils/period";
+import { getRequestQuery } from "~/server/services/utils/request";
+import { getUserTimezone } from "~/server/services/utils/cookies";
 
 export async function addEntry(event: HttpEvent) {
   const body = await readBody<IMoodEntryCreate>(event);
@@ -42,10 +44,8 @@ export async function removeEntry(event: HttpEvent) {
 
 export async function recoverTodayMoodBoard(event: HttpEvent) {
   const user = event.context.user;
-  const query = getQuery<Omit<ListQuery, "period"> & { period: string }>(event);
-  const timeZone = getCookie(event, "timezone") ?? "UTC";
-
-  console.log(timeZone, getTodayRangeForTimezone(timeZone));
+  const query = getRequestQuery(event);
+  const timeZone = getUserTimezone(event);
 
   try {
     const moodBoard = await moodEntries.getUserEntries(user.id, {
