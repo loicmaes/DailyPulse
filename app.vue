@@ -9,6 +9,10 @@ const theme = computed((): "dark" | "light" => {
 
   return colorMode.preference as "dark" | "light";
 });
+
+onNuxtReady(() => {
+  document.cookie = `timezone=${useClientTimeZone()}; path=/`;
+});
 </script>
 
 <template>

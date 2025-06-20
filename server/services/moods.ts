@@ -6,6 +6,7 @@ import { handleException, setOutput } from "~/server/services/utils/errors";
 import type { DailyException } from "~/types/utils/exceptions";
 import { BadRequestException } from "~/types/utils/exceptions";
 import type { ListQuery } from "~/types/utils/globals";
+import { getTodayRangeForTimezone } from "~/server/services/utils/period";
 
 export async function addEntry(event: HttpEvent) {
   const body = await readBody<IMoodEntryCreate>(event);
@@ -42,17 +43,14 @@ export async function removeEntry(event: HttpEvent) {
 export async function recoverTodayMoodBoard(event: HttpEvent) {
   const user = event.context.user;
   const query = getQuery<Omit<ListQuery, "period"> & { period: string }>(event);
+  const timeZone = getCookie(event, "timezone") ?? "UTC";
 
-  if (!query?.period) return handleException(event, new BadRequestException("Period query info isn't provided!"));
-
-  const period = JSON.parse(query.period as string);
-  period.start = new Date(period.start);
-  period.end = new Date(period.end);
+  console.log(timeZone, getTodayRangeForTimezone(timeZone));
 
   try {
     const moodBoard = await moodEntries.getUserEntries(user.id, {
       ...query,
-      period,
+      period: getTodayRangeForTimezone(timeZone),
     });
 
     if (moodBoard.meta.count === 0) setOutput(event, StatusCode.NO_CONTENT, "Your mood board is actually empty!");
