@@ -40,22 +40,19 @@ export async function removeEntry(event: HttpEvent) {
 }
 
 export async function recoverTodayMoodBoard(event: HttpEvent) {
-  const localNow = getHeader(event, "LocalNow");
-
-  const now = localNow ? new Date(Number(localNow)) : new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-
   const user = event.context.user;
-  const query = getQuery<Omit<ListQuery, "period">>(event);
+  const query = getQuery<Omit<ListQuery, "period"> & { period: string }>(event);
+
+  if (!query?.period) return handleException(event, new BadRequestException("Period query info isn't provided!"));
+
+  const period = JSON.parse(query.period as string);
+  period.start = new Date(period.start);
+  period.end = new Date(period.end);
 
   try {
     const moodBoard = await moodEntries.getUserEntries(user.id, {
       ...query,
-      period: {
-        start,
-        end,
-      },
+      period,
     });
 
     if (moodBoard.meta.count === 0) setOutput(event, StatusCode.NO_CONTENT, "Your mood board is actually empty!");
