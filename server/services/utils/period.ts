@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 import type { IPeriod } from "~/types/utils/globals";
 
-export function getTodayRangeForTimezone(timeZone: string): IPeriod {
-  const now = DateTime.now().setZone(timeZone);
+export function getTodayRangeForTimezone(zone: string): IPeriod {
+  const now = DateTime.now().setZone(zone);
 
   const start = now.startOf("day").toUTC().toJSDate();
   const end = now.endOf("day").plus({ seconds: 1 }).toUTC().toJSDate();
@@ -18,4 +18,8 @@ export function getZonedPeriodFromDates(_start: Date | string | number, _end: Da
     start,
     end,
   };
+}
+
+export function getZonedNow(zone: string): Date {
+  return DateTime.now().setZone(zone).toJSDate();
 }

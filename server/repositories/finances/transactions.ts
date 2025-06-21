@@ -53,6 +53,11 @@ export async function getAll(userId: string, query?: ListQuery): Promise<ListRes
   const limit = query?.perPage ?? 25;
   const offset = (page - 1) * limit;
 
+  const taking: { take: number | undefined; skip: number | undefined } = {
+    take: limit > 0 ? limit : undefined,
+    skip: limit > 0 ? offset : undefined,
+  };
+
   const count = await countAll(userId, query?.period);
   const list = await prisma.transaction.findMany({
     where: {
@@ -65,8 +70,7 @@ export async function getAll(userId: string, query?: ListQuery): Promise<ListRes
     orderBy: {
       createdAt: "desc",
     },
-    take: limit,
-    skip: offset,
+    ...taking,
   });
 
   return {

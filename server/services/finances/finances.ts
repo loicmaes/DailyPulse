@@ -1,11 +1,18 @@
 import type { HttpEvent } from "~/types/utils/http";
 import { StatusCode } from "~/types/utils/http";
-import type { ITransactionCreate } from "~/types/finances/transactions";
+import type { ITransaction, ITransactionCreate } from "~/types/finances/transactions";
 import { handleException, setOutput } from "~/server/services/utils/errors";
 import type { DailyException } from "~/types/utils/exceptions";
 import { BadRequestException } from "~/types/utils/exceptions";
 import * as transactions from "~/server/repositories/finances/transactions";
 import { getRequestQuery } from "~/server/services/utils/request";
+import { getZonedNow, getZonedPeriodFromDates } from "~/server/services/utils/period";
+import { getUserTimezone } from "~/server/services/utils/cookies";
+import type { IFinanceStatistics } from "~/types/finances/statistics";
+
+const saving = (list: ITransaction[]) => list
+  .map(data => data.type === "expense" ? -data.amount : data.amount)
+  .reduce((acc, obj) => acc += obj);
 
 export async function addTransaction(event: HttpEvent) {
   const body = await readBody<ITransactionCreate>(event);
@@ -49,6 +56,33 @@ export async function getTransactionsHistory(event: HttpEvent) {
     if (result.meta.total === 0) setOutput(event, StatusCode.NO_CONTENT, "No transactions registered yet!");
     else setOutput(event, result.meta.total > result.meta.count ? StatusCode.PARTIAL_CONTENT : StatusCode.OK, "There is your transactions history.");
     return result;
+  }
+  catch (e) {
+    return handleException(event, e as DailyException);
+  }
+}
+
+export async function getTransactionStatistics(event: HttpEvent) {
+  const user = event.context.user;
+  const timezone = getUserTimezone(event);
+
+  const now = getZonedNow(timezone);
+
+  try {
+    const thisMonth = await transactions.getAll(user.id, {
+      perPage: -1,
+      period: getZonedPeriodFromDates(
+        new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0),
+        new Date(now.getFullYear(), now.getMonth() + 1, 0, 0, 0, 0),
+        timezone,
+      ),
+    });
+
+    return {
+      savings: saving(thisMonth.data),
+      monthlySubscriptions: 0,
+      annuallySubscriptions: 0,
+    } as IFinanceStatistics;
   }
   catch (e) {
     return handleException(event, e as DailyException);

@@ -1,14 +1,23 @@
 <script setup lang="ts">
-import { BanknoteArrowDown, BanknoteArrowUp, Plus, Search } from "lucide-vue-next";
+import { BanknoteArrowDown, BanknoteArrowUp, Plus, Search, LoaderCircle } from "lucide-vue-next";
 import TransactionsTable from "~/components/shared/finances/table/TransactionsTable.vue";
 import TransactionDialog from "~/components/shared/finances/dialogs/TransactionDialog.vue";
 import type { ETransactionType } from "~/types/finances/transactions";
 
+const { locale } = useI18n();
+
 const store = useFinancesStore();
+const { statisticsLoading, statistics } = storeToRefs(store);
+
+store.loadStatistics();
 store.loadTransactions();
 
 const dialogOpen = ref<boolean>(false);
 const newTransactionType = ref<ETransactionType>();
+const currencyNumber = (value: number): string => Intl.NumberFormat(locale.value, {
+  style: "currency",
+  currency: "EUR",
+}).format(value);
 
 const openDialog = (type: ETransactionType) => {
   newTransactionType.value = type;
@@ -63,6 +72,21 @@ const openDialog = (type: ETransactionType) => {
             Abonnements mensuels
           </CardTitle>
         </CardHeader>
+
+        <CardContent class="grid place-items-center">
+          <LoaderCircle
+            v-if="statisticsLoading"
+            class="animate-spin"
+          />
+          <p
+            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
+            :class="{
+              'text-red-600 dark:text-red-400': (statistics?.monthlySubscriptions ?? 0) < 0,
+            }"
+          >
+            {{ currencyNumber(statistics?.monthlySubscriptions ?? 0) }}
+          </p>
+        </CardContent>
       </Card>
       <Card>
         <CardHeader class="flex">
@@ -70,6 +94,21 @@ const openDialog = (type: ETransactionType) => {
             Abonnements annuels
           </CardTitle>
         </CardHeader>
+
+        <CardContent class="grid place-items-center">
+          <LoaderCircle
+            v-if="statisticsLoading"
+            class="animate-spin"
+          />
+          <p
+            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
+            :class="{
+              'text-red-600 dark:text-red-400': (statistics?.annuallySubscriptions ?? 0) < 0,
+            }"
+          >
+            {{ currencyNumber(statistics?.annuallySubscriptions ?? 0) }}
+          </p>
+        </CardContent>
       </Card>
       <Card>
         <CardHeader class="flex">
@@ -77,6 +116,21 @@ const openDialog = (type: ETransactionType) => {
             Économies réalisées
           </CardTitle>
         </CardHeader>
+
+        <CardContent class="grid place-items-center">
+          <LoaderCircle
+            v-if="statisticsLoading"
+            class="animate-spin"
+          />
+          <p
+            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
+            :class="{
+              'text-red-600 dark:text-red-400': (statistics?.savings ?? 0) < 0,
+            }"
+          >
+            {{ currencyNumber(statistics?.savings ?? 0) }}
+          </p>
+        </CardContent>
       </Card>
     </section>
     <section v-if="false">
