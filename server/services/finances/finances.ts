@@ -12,7 +12,10 @@ import type { IFinanceStatistics } from "~/types/finances/statistics";
 
 const saving = (list: ITransaction[]) => list
   .map(data => data.type === "expense" ? -data.amount : data.amount)
-  .reduce((acc, obj) => acc += obj);
+  .reduce((acc, obj) => {
+    acc += obj;
+    return acc;
+  });
 
 export async function addTransaction(event: HttpEvent) {
   const body = await readBody<ITransactionCreate>(event);
