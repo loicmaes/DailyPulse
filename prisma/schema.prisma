@@ -16,9 +16,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  authSessions AuthSession[]
-  moodEntries  MoodEntry[]
-  Transaction  Transaction[]
+  authSessions          AuthSession[]
+  moodEntries           MoodEntry[]
+  transactions          Transaction[]
+  recurringTransactions RecurringTransaction[]
 
   @@map("users")
 }
@@ -56,18 +57,47 @@ enum TransactionType {
   income
 }
 
-model Transaction {
-  id        String          @id @default(uuid())
-  userId    String
-  type      TransactionType
-  label     String
-  amount    Float
-  date      DateTime        @db.Date
-  note      String?
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+enum TransactionFrequency {
+  monthly
+  yearly
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Transaction {
+  id          String          @id @default(uuid())
+  userId      String
+  type        TransactionType
+  label       String
+  amount      Float
+  date        DateTime        @db.Date
+  note        String?
+  recurringId String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  user                 User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recurringTransaction RecurringTransaction? @relation(fields: [recurringId], references: [id], onDelete: SetNull)
 
   @@map("transactions")
+}
+
+model RecurringTransaction {
+  id          String               @id @default(uuid())
+  userId      String
+  type        TransactionType
+  label       String
+  amount      Float
+  startDate   DateTime             @db.Date
+  endDate     DateTime?            @db.Date
+  nextDueDate DateTime             @db.Date
+  frequency   TransactionFrequency
+  note        String?
+  active      Boolean              @default(true)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  transactions Transaction[]
+
+  use User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("recurring_transactions")
 }

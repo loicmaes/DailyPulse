@@ -3,8 +3,6 @@ Enum TransactionType {
   income
 }
 Enum Frequency {
-  daily
-  weekly
   monthly
   yearly
 }
