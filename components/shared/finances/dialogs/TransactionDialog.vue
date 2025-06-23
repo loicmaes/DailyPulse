@@ -29,7 +29,7 @@ const { handleSubmit, resetForm } = useForm({
   initialValues: {
     label: props.transaction?.label,
     amount: props.transaction?.amount,
-    note: props.transaction?.note,
+    note: props.transaction?.note ?? undefined,
   },
 });
 const submit = handleSubmit(async (values) => {
@@ -78,6 +78,7 @@ const submit = handleSubmit(async (values) => {
               <Input
                 type="number"
                 inputmode="numeric"
+                :step=".01"
                 placeholder="ex. 41.32"
                 :disabled="loading"
               />
