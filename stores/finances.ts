@@ -1,6 +1,6 @@
 import { toast } from "vue-sonner";
 import type { ITransaction, ITransactionCreate } from "~/types/finances/transactions";
-import type { ListResult, TNull } from "~/types/utils/globals";
+import type { ListQuery, ListResult, TNull } from "~/types/utils/globals";
 import type { IFinanceStatistics } from "~/types/finances/statistics";
 
 interface FinancesState {
@@ -23,11 +23,13 @@ export const useFinancesStore = defineStore("finances", {
     translate: () => useNuxtApp().$i18n.t,
   },
   actions: {
-    async loadTransactions() {
+    async loadTransactions(query?: ListQuery) {
       this.loading = true;
 
       try {
-        const { data } = await useFetch<ListResult<ITransaction>>("/api/finances/transactions");
+        const { data } = await useFetch<ListResult<ITransaction>>("/api/finances/transactions", {
+          params: { ...query },
+        });
         if (!data.value) return;
 
         this.totalTransactions = data.value.meta.total;

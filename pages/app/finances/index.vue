@@ -3,6 +3,7 @@ import { BanknoteArrowDown, BanknoteArrowUp, Plus, Search, LoaderCircle } from "
 import TransactionsTable from "~/components/shared/finances/table/TransactionsTable.vue";
 import TransactionDialog from "~/components/shared/finances/dialogs/TransactionDialog.vue";
 import type { ETransactionType } from "~/types/finances/transactions";
+import FinanceStatCard from "~/components/shared/finances/FinanceStatCard.vue";
 
 const { locale } = useI18n();
 
@@ -10,14 +11,13 @@ const store = useFinancesStore();
 const { statisticsLoading, statistics } = storeToRefs(store);
 
 store.loadStatistics();
-store.loadTransactions();
+store.loadTransactions({
+  page: 1,
+  perPage: 10,
+});
 
 const dialogOpen = ref<boolean>(false);
 const newTransactionType = ref<ETransactionType>();
-const currencyNumber = (value: number): string => Intl.NumberFormat(locale.value, {
-  style: "currency",
-  currency: "EUR",
-}).format(value);
 
 const openDialog = (type: ETransactionType) => {
   newTransactionType.value = type;
@@ -61,77 +61,26 @@ const openDialog = (type: ETransactionType) => {
 
       <TransactionDialog
         v-model:open="dialogOpen"
-        :type="newTransactionType"
+        :type="newTransactionType as ETransactionType"
       />
     </header>
 
     <section class="grid md:grid-cols-3 gap-4">
-      <Card>
-        <CardHeader class="flex">
-          <CardTitle class="text-sm">
-            Abonnements mensuels
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent class="grid place-items-center">
-          <LoaderCircle
-            v-if="statisticsLoading"
-            class="animate-spin"
-          />
-          <p
-            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
-            :class="{
-              'text-red-600 dark:text-red-400': (statistics?.monthlySubscriptions ?? 0) < 0,
-            }"
-          >
-            {{ currencyNumber(statistics?.monthlySubscriptions ?? 0) }}
-          </p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader class="flex">
-          <CardTitle class="text-sm">
-            Abonnements annuels
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent class="grid place-items-center">
-          <LoaderCircle
-            v-if="statisticsLoading"
-            class="animate-spin"
-          />
-          <p
-            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
-            :class="{
-              'text-red-600 dark:text-red-400': (statistics?.annuallySubscriptions ?? 0) < 0,
-            }"
-          >
-            {{ currencyNumber(statistics?.annuallySubscriptions ?? 0) }}
-          </p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader class="flex">
-          <CardTitle class="text-sm">
-            Économies réalisées
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent class="grid place-items-center">
-          <LoaderCircle
-            v-if="statisticsLoading"
-            class="animate-spin"
-          />
-          <p
-            class="text-5xl font-bold text-blue-600 dark:text-blue-400"
-            :class="{
-              'text-red-600 dark:text-red-400': (statistics?.savings ?? 0) < 0,
-            }"
-          >
-            {{ currencyNumber(statistics?.savings ?? 0) }}
-          </p>
-        </CardContent>
-      </Card>
+      <FinanceStatCard
+        label="Abonnements mensuels"
+        :value="statistics?.monthlySubscriptions"
+        :loading="statisticsLoading"
+      />
+      <FinanceStatCard
+        label="Abonnements annuels"
+        :value="statistics?.annuallySubscriptions"
+        :loading="statisticsLoading"
+      />
+      <FinanceStatCard
+        label="Économies réalisées"
+        :value="statistics?.savings"
+        :loading="statisticsLoading"
+      />
     </section>
     <section v-if="false">
       <Card>
